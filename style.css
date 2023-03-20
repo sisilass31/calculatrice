@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
-
+    background-color: #1d1d1d;
 }
 
 button {
@@ -71,6 +71,7 @@ button[data-key="13"] {
     background-color: #121212db;
     padding: 15px;
     border-radius: 15px;
+    box-shadow: white 0px 0px 8px;
 }
 
 .ecran {
