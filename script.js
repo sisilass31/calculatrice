@@ -1,13 +1,16 @@
 const calculator = document.querySelector('.calculatrice');
 
+//div screen = ou les chiffres apparaitront
 const screen = document.createElement('div');
 screen.classList.add('ecran');
 calculator.appendChild(screen)
 
+//div englobant les touches
 const touch = document.createElement('div');
 touch.classList.add('touches');
 calculator.appendChild(touch)
 
+//touches: data key = une clé (une valeur variable appliquée à une chaîne ou à un bloc de texte pour le crypter ou le décrypter)
 const restart = document.createElement('button');
 restart.classList.add('bouton')
 restart.innerText = 'AC';
@@ -123,31 +126,42 @@ egal.innerText = "=";
 touch.appendChild(egal);
 egal.setAttribute("data-key", "13");
 
-// DOM
-const touches = [...document.querySelectorAll('.bouton')];
-const listeKeycode = touches.map(touche => touche.dataset.key);
-// const ecran = document.querySelector('.ecran');
+
+// l'événement keydown est déclenché pour toutes les clés.
+// e =  représente l'objet "événement"
+// addEventListener = fonction qui sera appelée à chaque fois que l'événement spécifié est livré.
+// keyCode = est une propriété de l'évènement qui contient le code numérique de la touche qui a été pressée.
 
 document.addEventListener('keydown', (e) => {
     const valeur = e.keyCode.toString();
     calculer(valeur)
-
 })
+
+/* lorsqu'on appuyera sur un bouton:  retourne la valeur de "data-key" de l'élément HTML sur lequel l'événement de clic a été déclenché,
+sous forme de chaîne de caractères.*/
+// dataset = permet d'accéder à tous les attributs "data"
+// key =  nom de la valeur que l'on veut récupérer.
+// target = est une propriété de l'évènement qui contient la référence à l'élément HTML sur lequel l'événement s'est produit.
 
 document.addEventListener('click', (e) => {
     const valeur = e.target.dataset.key;
     calculer(valeur)
-
 })
 
+// on a mis nos boutons dans un tableau appelé 'touches'
+const touches = [...document.querySelectorAll('.bouton')];
+//listeKeycode = permet de créer un nouveau tableau qui contient les valeurs de l'attribut data-key de chaque élément du tableau initial touches.
+const listeKeycode = touches.map(touche => touche.dataset.key);
+
+// valeur = représente le code numérique de la touche qui a été pressée.
 const calculer = (valeur) => {
     if (listeKeycode.includes(valeur)) {
         switch (valeur) {
             case '8':
-                screen.textContent = "";
+                screen.textContent = ""; // quand la touche AC est appuyée alors le screen sera vide
                 break;
             case '13':
-                const calcul = eval(screen.textContent);
+                const calcul = eval(screen.textContent); // quand la touche = est appuyée alors le calcul sera exécuter
                 screen.textContent = calcul;
                 break;
             default:
